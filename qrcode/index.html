@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>QR Code Generator</title>
+    <script src="./qrcode.min.js"></script>
+</head>
+
+<body>
+    <div id="qr"></div>
+    <script>
+        function b64_decode(str) {
+            var s = (str + '==='.slice((str.length + 3) % 4)).replace(/-/g, '+').replace(/_/g, '/')
+            return atob(s);
+        }
+        document.addEventListener('DOMContentLoaded', function() {
+            var data = b64_decode((new URL(window.location.href)).searchParams.get('qr'));
+            new QRCode(document.getElementById("qr"), data);
+        });
+    </script>
+</body>
+</html>
